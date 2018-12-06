@@ -13,7 +13,7 @@ import html2text
 class getmailclass():
     def getmailfunc():
         h = html2text.HTML2Text()
-        h.ignore_links = False
+        h.ignore_links = True
         login = 'govtechinternship@gmail.com'
         print("login assigned")
         password = 'mcONLINE123'
@@ -26,9 +26,9 @@ class getmailclass():
             print(mail.body)
             incasehtml = h.handle(mail.body)
             print("HTML cleaned: " + incasehtml)
-            return incasehtml, mail.from_addr
+            response = (incasehtml + "<b>  ---> FROM: </b>" + mail.from_addr + "<b> ---> content type: </b>" + str(mail.content_type) + "<b> ---> attachments: </b>" + str(mail.attachments) + "<b> ---> date: </b>" + str(mail.date) + "<b> ---> mime version: </b>" + str(mail.mime_version) + "<b> ---> mail sender: </b>" + str(mail.sender))
+            
+            return response
             break
-        return incasehtml, mail.from_addr
-
-
+        return response
     

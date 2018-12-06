@@ -272,7 +272,7 @@ a.article:hover {
 	.chatbox {
 		width: 500px;
 		min-width: 390px;
-		height: 1300px;
+		height: 900px;
 		background: #fff;
 		padding: 10px;
 		margin: 0px 50px 900px 900px;
@@ -290,7 +290,7 @@ a.article:hover {
 	.chat-form textarea {
 		background: #fbfbfb;
 		width: 75%;
-		height: 900px;
+		height: 50px;
 		border: 2px solid #eee;
 		border-radius: 3px;
 		padding: 10px;
@@ -384,15 +384,23 @@ a.article:hover {
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="emailcontentdisplay">
+	
+	<div class="chatbox">
+    <div class="emailcontentdisplay">
+        <p id="showlog11" class="showlog">&nbsp;</p>
+        <p id="showlog10" class="showlog">&nbsp;</p>
+        <p id="showlog9" class="showlog">&nbsp;</p>
+        <p id="showlog8" class="showlog">&nbsp;</p>
+        <p id="showlog7" class="showlog">&nbsp;</p>
+        <p id="showlog6" class="showlog">&nbsp;</p>
 		<p id="showlog5" class="showlog">&nbsp;</p>
 		<p id="showlog4" class="showlog">&nbsp;</p>
 		<p id="showlog3" class="showlog">&nbsp;</p>
 		<p id="showlog2" class="showlog">&nbsp;</p>
 		<p id="showlog1" class="showlog">&nbsp;</p>
 	</div>
-	<div class="chatbox">
-		<h1>Please enter: </h1><p>EMAIL, PASSWORD, FROMMAIL, TOMAIL, SUBJECT TEXT, BODY TEXT</p>
+    <h1> _____________________ </h1>
+		<h1>Email Receiver </h1><p>This machine can retrieve emails from govtechinternship@gmail.com in HTML and Plain Text format.</p>
 		<div class="chatlogs">
 			<p id="thinking"></p>
 		</div>
@@ -403,8 +411,7 @@ a.article:hover {
 
 		<script>
 		var messages = [],
-		UM = "", //keeps track of the most recent input string from the user
-		botMessage = "", //var keeps track of what the chatbot is going to say
+		UM = "", //keeps track of the most recent input string from the user  //var keeps track of what the chatbot is going to say
 		botName = 'Tom',
 		textbeforesplit = "",
 		textonly = "",
@@ -425,51 +432,21 @@ a.article:hover {
                 		url: 'getamail/', 
 						data: {'message': textbeforesplit}, //sends message to chatbot MAYBE CAN SEPERATE IT INTO FIELDS COS ITS NO CHATBOT
                 		success: function(data) { //once reply is received,
-							botMessage = data; //stores reply in botMessge
+							var botMessage = data; //stores reply in botMessge
+                            document.getElementById("thinking").innerHTML = "";
+                            messages.push("<b>" + botName + ":</b> " + botMessage); //add bot's message to var messages
+                            for (var i = 1; i < 11; i++) {
+                                if (messages[messages.length - i]){
+                                    document.getElementById("showlog" + i).innerHTML = messages[messages.length - i];
+                                }}
                 		}
             		});
-					document.getElementById("thinking").innerHTML = "Thinking...";
-					setTimeout(function(){
-						document.getElementById("thinking").innerHTML = "";
-						messages.push("<b>" + botName + ":</b> " + botMessage); //add bot's message to var messages
-						for (var i = 1; i < 8; i++) {
-							if (messages[messages.length - i]){
-								document.getElementById("showlog" + i).innerHTML = messages[messages.length - i];
-							}}
-						Speech(botMessage); //reads message
-					},1000);
+					
 					
 					
 				}
 			});
 		});
-
-		function show_image(src, width, height, alt) {
-			var img = document.createElement("img");
-			img.src = src;
-			img.width = width;
-			img.height = height;
-			img.alt = alt;
-			// This next line will just add it to the <body> tag
-			document.body.appendChild(img);
-		}
-
-
-
-
-		function Speech(say) {
-			if ('speechSynthesis' in window && talking) {
-				var utterance = new SpeechSynthesisUtterance(say);
-				//msg.voice = voices[10]; // Note: some voices don't support altering params
-				//msg.voiceURI = 'native';
-				utterance.volume = 1; // 0 to 1
-				utterance.rate = 1.5; // 0.1 to 10
-				utterance.pitch = 1; //0 to 2
-				//utterance.text = 'Hello World';
-				utterance.lang = 'en-US';
-				speechSynthesis.speak(utterance);
-			}
-		}
 		</script>
 </body>
 {% comment %} <div class="wrapper">
