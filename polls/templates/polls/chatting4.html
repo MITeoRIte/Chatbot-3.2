@@ -434,7 +434,7 @@ a.article:hover {
                 		success: function(data) { //once reply is received,
 							var botMessage = data; //stores reply in botMessge
                             document.getElementById("thinking").innerHTML = "";
-                            messages.push("<b>" + botName + ":</b> " + botMessage); //add bot's message to var messages
+                            messages.push("<b>" + botName + "</b> " + botMessage); //add bot's message to var messages
                             for (var i = 1; i < 11; i++) {
                                 if (messages[messages.length - i]){
                                     document.getElementById("showlog" + i).innerHTML = messages[messages.length - i];
